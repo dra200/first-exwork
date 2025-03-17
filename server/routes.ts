@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
+import axios from "axios";
 import { 
   insertUserSchema, 
   insertProjectSchema, 
@@ -677,6 +678,100 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ count });
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch unread message count" });
+    }
+  });
+
+  // ML API proxy routes
+  const ML_API_BASE_URL = "http://localhost:5001"; // ML API URL
+
+  // Project recommendations for sellers
+  app.get("/api/ml/recommendations/projects/:sellerId", isAuthenticated, checkRole('seller'), async (req, res) => {
+    try {
+      const sellerId = req.params.sellerId;
+      const response = await axios.get(`${ML_API_BASE_URL}/api/recommend/projects/${sellerId}`);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API recommendation error:", error.message);
+      res.status(500).json({ message: "Failed to get project recommendations" });
+    }
+  });
+
+  // Seller recommendations for projects
+  app.get("/api/ml/recommendations/sellers/:projectId", isAuthenticated, checkRole('buyer'), async (req, res) => {
+    try {
+      const projectId = req.params.projectId;
+      const response = await axios.get(`${ML_API_BASE_URL}/api/recommend/sellers/${projectId}`);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API recommendation error:", error.message);
+      res.status(500).json({ message: "Failed to get seller recommendations" });
+    }
+  });
+
+  // Price prediction for projects
+  app.post("/api/ml/price-prediction", isAuthenticated, async (req, res) => {
+    try {
+      const response = await axios.post(`${ML_API_BASE_URL}/api/predict/price`, req.body);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API price prediction error:", error.message);
+      res.status(500).json({ message: "Failed to predict price" });
+    }
+  });
+
+  // Proposal price evaluation
+  app.post("/api/ml/evaluate-proposal", isAuthenticated, async (req, res) => {
+    try {
+      const response = await axios.post(`${ML_API_BASE_URL}/api/evaluate/proposal`, req.body);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API proposal evaluation error:", error.message);
+      res.status(500).json({ message: "Failed to evaluate proposal" });
+    }
+  });
+
+  // Market analytics
+  app.get("/api/ml/analytics/market", isAuthenticated, async (req, res) => {
+    try {
+      const response = await axios.get(`${ML_API_BASE_URL}/api/analytics/market`);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API market analytics error:", error.message);
+      res.status(500).json({ message: "Failed to get market analytics" });
+    }
+  });
+
+  // Buyer analytics
+  app.get("/api/ml/analytics/buyer/:buyerId", isAuthenticated, checkRole('buyer'), async (req, res) => {
+    try {
+      const buyerId = req.params.buyerId;
+      const user = await getCurrentUser(req);
+      if (!user || user.id !== parseInt(buyerId)) {
+        return res.status(403).json({ message: "You don't have permission to access these analytics" });
+      }
+      
+      const response = await axios.get(`${ML_API_BASE_URL}/api/analytics/buyer/${buyerId}`);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API buyer analytics error:", error.message);
+      res.status(500).json({ message: "Failed to get buyer analytics" });
+    }
+  });
+
+  // Seller analytics
+  app.get("/api/ml/analytics/seller/:sellerId", isAuthenticated, checkRole('seller'), async (req, res) => {
+    try {
+      const sellerId = req.params.sellerId;
+      const user = await getCurrentUser(req);
+      if (!user || user.id !== parseInt(sellerId)) {
+        return res.status(403).json({ message: "You don't have permission to access these analytics" });
+      }
+      
+      const response = await axios.get(`${ML_API_BASE_URL}/api/analytics/seller/${sellerId}`);
+      res.json(response.data);
+    } catch (error: any) {
+      console.error("ML API seller analytics error:", error.message);
+      res.status(500).json({ message: "Failed to get seller analytics" });
     }
   });
 
