@@ -123,3 +123,61 @@ export const getSellerEarnings = async () => {
   const response = await apiRequest('GET', '/api/seller/earnings');
   return response.json();
 };
+
+// ML API integration
+
+/**
+ * Get project recommendations for a seller
+ */
+export const getProjectRecommendations = async (sellerId: number) => {
+  const response = await apiRequest('GET', `/api/ml/recommendations/projects/${sellerId}`);
+  return response.json();
+};
+
+/**
+ * Get seller recommendations for a project
+ */
+export const getSellerRecommendations = async (projectId: number) => {
+  const response = await apiRequest('GET', `/api/ml/recommendations/sellers/${projectId}`);
+  return response.json();
+};
+
+/**
+ * Get price prediction for a project
+ */
+export const getPricePrediction = async (projectData: any) => {
+  const response = await apiRequest('POST', '/api/ml/price-prediction', projectData);
+  return response.json();
+};
+
+/**
+ * Evaluate a proposal price
+ */
+export const evaluateProposalPrice = async (projectId: number, price: number) => {
+  const response = await apiRequest('POST', '/api/ml/evaluate-proposal', { projectId, price });
+  return response.json();
+};
+
+/**
+ * Get market analytics
+ */
+export const getMarketAnalytics = async () => {
+  const response = await apiRequest('GET', '/api/ml/analytics/market');
+  return response.json();
+};
+
+/**
+ * Get buyer analytics
+ */
+export const getBuyerAnalytics = async (buyerId: number) => {
+  const response = await apiRequest('GET', `/api/ml/analytics/buyer/${buyerId}`);
+  return response.json();
+};
+
+/**
+ * Get seller analytics
+ */
+export const getSellerAnalytics = async (sellerId: number) => {
+  const response = await apiRequest('GET', `/api/ml/analytics/seller/${sellerId}`);
+  return response.json();
+};
