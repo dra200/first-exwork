@@ -4,7 +4,7 @@ import { getProjectRecommendations } from "@/lib/api";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { ProjectCard } from "./ProjectCard";
+import ProjectCard from "./ProjectCard";
 import { Loader2 } from "lucide-react";
 
 interface RecommendedProject {

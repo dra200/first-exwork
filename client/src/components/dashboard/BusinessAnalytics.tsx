@@ -103,9 +103,9 @@ export function BusinessAnalytics() {
                     fill="#8884d8"
                     dataKey="value"
                     nameKey="name"
-                    label={(entry) => entry.name}
+                    label={(entry: any) => entry.name}
                   >
-                    {marketData.category_distribution.map((entry, index) => (
+                    {marketData.category_distribution.map((entry: any, index: number) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>

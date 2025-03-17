@@ -4,6 +4,8 @@ import { useLocation } from 'wouter';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { ProjectRecommendations } from '@/components/dashboard/ProjectRecommendations';
+import { BusinessAnalytics } from '@/components/dashboard/BusinessAnalytics';
 
 interface DashboardStat {
   title: string;
@@ -153,37 +155,47 @@ const SellerDashboard = () => {
         </div>
         
         {/* Recent Activity */}
-        <Card className="bg-white overflow-hidden">
-          <div className="p-6 border-b">
-            <h2 className="font-bold">Recent Activity</h2>
-          </div>
-          
-          <div className="divide-y divide-neutral-100">
-            {recentActivities.map((activity, index) => (
-              <div key={index} className="p-4 flex items-start">
-                {activity.icon}
-                <div>
-                  <div className="font-medium">{activity.title}</div>
-                  <div className="text-sm text-neutral-500 mb-1">{activity.details}</div>
-                  <div className="text-xs text-neutral-500">{formatDate(activity.timestamp)}</div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="bg-white overflow-hidden">
+            <div className="p-6 border-b">
+              <h2 className="font-bold">Recent Activity</h2>
+            </div>
+            
+            <div className="divide-y divide-neutral-100">
+              {recentActivities.map((activity, index) => (
+                <div key={index} className="p-4 flex items-start">
+                  {activity.icon}
+                  <div>
+                    <div className="font-medium">{activity.title}</div>
+                    <div className="text-sm text-neutral-500 mb-1">{activity.details}</div>
+                    <div className="text-xs text-neutral-500">{formatDate(activity.timestamp)}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
 
-            {/* If no recent activities, show an empty state */}
-            {recentActivities.length === 0 && (
-              <div className="p-6 text-center">
-                <p className="text-neutral-500">No recent activities yet.</p>
-                <Button 
-                  className="mt-4 bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => navigate('/dashboard/browse-projects')}
-                >
-                  Browse Projects
-                </Button>
-              </div>
-            )}
+              {/* If no recent activities, show an empty state */}
+              {recentActivities.length === 0 && (
+                <div className="p-6 text-center">
+                  <p className="text-neutral-500">No recent activities yet.</p>
+                  <Button 
+                    className="mt-4 bg-primary text-white hover:bg-primary-dark"
+                    onClick={() => navigate('/dashboard/browse-projects')}
+                  >
+                    Browse Projects
+                  </Button>
+                </div>
+              )}
+            </div>
+          </Card>
+          
+          {/* AI Project Recommendations */}
+          <div className="space-y-6">
+            <ProjectRecommendations />
           </div>
-        </Card>
+        </div>
+        
+        {/* Business Analytics from ML */}
+        <BusinessAnalytics />
       </div>
     </DashboardLayout>
   );

@@ -4,6 +4,8 @@ import { useLocation } from 'wouter';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { PricePrediction } from '@/components/dashboard/PricePrediction';
+import { BusinessAnalytics } from '@/components/dashboard/BusinessAnalytics';
 
 interface DashboardStat {
   title: string;
@@ -122,55 +124,61 @@ const BuyerDashboard = () => {
         </div>
         
         {/* Recent Projects Table */}
-        <Card className="bg-white overflow-hidden">
-          <div className="p-6 border-b">
-            <h2 className="font-bold">Recent Projects</h2>
-          </div>
-          
-          <div className="overflow-x-auto">
-            {isLoading ? (
-              <div className="p-6 text-center">Loading projects...</div>
-            ) : projects && projects.length > 0 ? (
-              <table className="w-full">
-                <thead className="bg-neutral-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Project</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Budget</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Deadline</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Proposals</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-neutral-100">
-                  {projects.slice(0, 5).map((project) => (
-                    <tr key={project.id} className="hover:bg-neutral-50 cursor-pointer" onClick={() => navigate(`/dashboard/projects/${project.id}`)}>
-                      <td className="px-6 py-4">
-                        <div className="font-medium">{project.title}</div>
-                        <div className="text-sm text-neutral-500">Posted {formatDate(project.createdAt)}</div>
-                      </td>
-                      <td className="px-6 py-4">
-                        {getStatusBadge(project.status)}
-                      </td>
-                      <td className="px-6 py-4">${project.budget}</td>
-                      <td className="px-6 py-4">{formatDate(project.deadline)}</td>
-                      <td className="px-6 py-4">{project.proposalCount}</td>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Card className="bg-white overflow-hidden">
+            <div className="p-6 border-b">
+              <h2 className="font-bold">Recent Projects</h2>
+            </div>
+            
+            <div className="overflow-x-auto">
+              {isLoading ? (
+                <div className="p-6 text-center">Loading projects...</div>
+              ) : projects && projects.length > 0 ? (
+                <table className="w-full">
+                  <thead className="bg-neutral-100">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Project</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Budget</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">Proposals</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <div className="p-6 text-center">
-                <p className="text-neutral-500">You haven't posted any projects yet.</p>
-                <Button 
-                  className="mt-4 bg-primary text-white hover:bg-primary-dark"
-                  onClick={() => navigate('/dashboard/post-project')}
-                >
-                  Post Your First Project
-                </Button>
-              </div>
-            )}
-          </div>
-        </Card>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-100">
+                    {projects.slice(0, 5).map((project) => (
+                      <tr key={project.id} className="hover:bg-neutral-50 cursor-pointer" onClick={() => navigate(`/dashboard/projects/${project.id}`)}>
+                        <td className="px-6 py-4">
+                          <div className="font-medium">{project.title}</div>
+                          <div className="text-sm text-neutral-500">Posted {formatDate(project.createdAt)}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          {getStatusBadge(project.status)}
+                        </td>
+                        <td className="px-6 py-4">${project.budget}</td>
+                        <td className="px-6 py-4">{project.proposalCount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="p-6 text-center">
+                  <p className="text-neutral-500">You haven't posted any projects yet.</p>
+                  <Button 
+                    className="mt-4 bg-primary text-white hover:bg-primary-dark"
+                    onClick={() => navigate('/dashboard/post-project')}
+                  >
+                    Post Your First Project
+                  </Button>
+                </div>
+              )}
+            </div>
+          </Card>
+          
+          {/* AI Price Prediction */}
+          <PricePrediction />
+        </div>
+        
+        {/* Business Analytics from ML */}
+        <BusinessAnalytics />
       </div>
     </DashboardLayout>
   );

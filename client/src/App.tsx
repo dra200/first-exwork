@@ -15,6 +15,7 @@ import ViewProposals from "@/pages/dashboard/buyer/ViewProposals";
 import OngoingProjects from "@/pages/dashboard/buyer/OngoingProjects";
 import BuyerMessages from "@/pages/dashboard/buyer/Messages";
 import Payments from "@/pages/dashboard/buyer/Payments";
+import ProjectDetail from "@/pages/dashboard/buyer/ProjectDetail";
 
 // Dashboard Pages - Seller
 import SellerDashboard from "@/pages/dashboard/SellerDashboard";
@@ -102,6 +103,13 @@ function Router() {
         <PrivateRoute role="buyer">
           <Payments />
         </PrivateRoute>
+      </Route>
+      <Route path="/dashboard/projects/:id">
+        {params => (
+          <PrivateRoute role="buyer">
+            <ProjectDetail />
+          </PrivateRoute>
+        )}
       </Route>
       
       {/* Seller Routes */}
