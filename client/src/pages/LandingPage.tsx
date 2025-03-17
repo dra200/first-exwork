@@ -12,9 +12,9 @@ const LandingPage = () => {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <div className="h-10 w-10 rounded-md bg-primary flex items-center justify-center mr-2">
-              <span className="text-white font-bold text-xl">T</span>
+              <span className="text-white font-bold text-xl">ex</span>
             </div>
-            <h1 className="text-xl font-bold text-primary">TechConnect</h1>
+            <h1 className="text-xl font-bold text-primary">exWork.eu</h1>
           </div>
           <div className="flex space-x-4">
             <Link href="/login">
@@ -62,7 +62,7 @@ const LandingPage = () => {
       <section className="py-16 px-4 md:px-10 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">How TechConnect Works</h2>
+            <h2 className="text-3xl font-bold mb-4">How exWork.eu Works</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our platform revolutionizes how businesses hire tech talent. Whether you're looking for AI developers, cybersecurity experts, or software engineers, our AI-powered system ensures that you're matched with the right provider for your project. Create, manage, and track your projects in one place.
             </p>
@@ -109,7 +109,7 @@ const LandingPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Key Features</h2>
             <p className="text-lg text-gray-600 max-w-xl mx-auto">
-              TechConnect offers powerful features designed to streamline the process of connecting businesses with tech talent.
+              exWork.eu offers powerful features designed to streamline the process of connecting businesses with tech talent.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -170,7 +170,7 @@ const LandingPage = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">What Our Users Say</h2>
             <p className="text-lg text-gray-600 max-w-xl mx-auto">
-              Hear from businesses and service providers who have used TechConnect.
+              Hear from businesses and service providers who have used exWork.eu.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -189,7 +189,7 @@ const LandingPage = () => {
                   </svg>
                 </div>
                 <p className="text-gray-600 italic mb-6">
-                  "TechConnect helped us find the perfect team for our AI project. The platform's user interface is so intuitive, and the communication was seamless!"
+                  "exWork.eu helped us find the perfect team for our AI project. The platform's user interface is so intuitive, and the communication was seamless!"
                 </p>
                 <div className="flex items-center">
                   <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3 text-primary font-bold">
@@ -218,7 +218,7 @@ const LandingPage = () => {
                   </svg>
                 </div>
                 <p className="text-gray-600 italic mb-6">
-                  "As a freelance developer, TechConnect has been vital for finding consistent clients. The payment process is transparent and I get paid on time, every time."
+                  "As a freelance developer, exWork.eu has been vital for finding consistent clients. The payment process is transparent and I get paid on time, every time."
                 </p>
                 <div className="flex items-center">
                   <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3 text-primary font-bold">
@@ -277,9 +277,9 @@ const LandingPage = () => {
             <div>
               <div className="flex items-center mb-4">
                 <div className="h-10 w-10 rounded-md bg-white flex items-center justify-center mr-2">
-                  <span className="text-primary font-bold text-xl">T</span>
+                  <span className="text-primary font-bold text-xl">ex</span>
                 </div>
-                <h3 className="text-xl font-bold">TechConnect</h3>
+                <h3 className="text-xl font-bold">exWork.eu</h3>
               </div>
               <p className="text-white/70">
                 Connecting businesses with top tech talent, effortlessly.
@@ -313,7 +313,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-white/50">
-            <p>© {new Date().getFullYear()} TechConnect. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} exWork.eu. All rights reserved.</p>
           </div>
         </div>
       </footer>
