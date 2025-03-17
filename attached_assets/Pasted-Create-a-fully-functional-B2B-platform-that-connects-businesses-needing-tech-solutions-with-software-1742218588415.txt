@@ -1,0 +1,47 @@
+Create a fully functional B2B platform that connects businesses needing tech solutions with software service providers. The platform should have:
+
+1️⃣ User Roles & Authentication
+	•	Two user roles: Buyers (companies posting projects) & Sellers (service providers submitting proposals).
+	•	Secure sign-up & login system with email authentication.
+	•	Role-based access control (buyers can’t apply for projects, sellers can’t post projects).
+
+2️⃣ Dashboard Design
+
+Buyer Dashboard (For companies posting projects)
+	•	Post a Project: A form with fields: Title, Description, Budget, Deadline.
+	•	View Offers: A list of proposals submitted by sellers.
+	•	Project Progress: Status updates and reports on ongoing projects.
+
+Seller Dashboard (For service providers)
+	•	Browse Projects: A list of available projects posted by buyers.
+	•	Submit Proposal: A form with fields: Service Details, Price, Estimated Delivery Time.
+	•	Ongoing Projects: A task management section to track progress on accepted projects.
+
+3️⃣ Database Schema
+	•	Users: Stores user details (name, email, password, role).
+	•	Projects: Stores project details (title, description, budget, deadline, status, buyer_id).
+	•	Proposals: Stores offers from sellers (service_details, price, delivery_time, project_id, seller_id).
+	•	Payments: Tracks payments (project_id, amount, commission, status).
+
+4️⃣ Payments (Stripe Integration)
+	•	Implement Stripe for secure transactions.
+	•	Buyers pay through the platform, which deducts a 15% commission before transferring funds to sellers.
+	•	Payment tracking system for transparency.
+
+5️⃣ Communication System
+	•	In-app messaging for discussions between buyers and sellers.
+	•	Email notifications when a project is posted, an offer is received, or a payment is processed.
+
+6️⃣ Security & Privacy
+	•	Restrict direct contact to ensure all transactions happen on the platform.
+	•	Enable SSL encryption and role-based permissions.
+
+7️⃣ UI/UX Design
+	•	Modern, minimalistic design with blue & white color themes.
+	•	Responsive layout for desktop and mobile use.
+
+8️⃣ Deployment & Scalability
+	•	Deploy on Replit with a database (e.g., PostgreSQL or Firebase).
+	•	Ensure API endpoints are secured for future mobile app expansion.
+
+Build this as a scalable, ready-to-launch B2B marketplace with a seamless user experience.”
